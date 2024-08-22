@@ -1,0 +1,23 @@
+# Ignorar la carpeta node_modules y su contenido
+node_modules/
+
+# Otros archivos y carpetas comunes que podrías querer ignorar en un proyecto de Node.js
+
+# Archivos de configuración de log
+*.log
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración de editor
+.vscode/
+.idea/
+
+# Archivos generados por compiladores
+dist/
+build/
+
+# Archivos de dependencias de paquetes
+package-lock.json
+yarn.lock
