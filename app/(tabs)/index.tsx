@@ -1,14 +1,16 @@
 import { StyleSheet, Text, View } from "react-native"
 import React from "react"
-import { ThemeToggle } from "~/components/ThemeToggle"
 import { Lightbulb } from "~/lib/icons/Lightbulb"
 import { Coffee } from "~/lib/icons/Coffee"
 import { Armchair } from "~/lib/icons/Armchair"
 import { AlignJustify } from "~/lib/icons/AlignJustify"
 import { Settings } from "~/lib/icons/Settings"
 import FontAwesome from "@expo/vector-icons/FontAwesome"
+import { useTimer } from "~/app/features/timer/hooks/useTimer"
 
 const Timer = () => {
+	const { currentTime, startTimer, stopTimer, isTimerActive } = useTimer()
+
 	return (
 		// all index container
 		<View className='items-center gap-32 grow py-3'>
@@ -23,7 +25,7 @@ const Timer = () => {
 
 			{/* timer and circles */}
 			<View className='items-center'>
-				<Text className='text-[80px] font-bold'>25:00</Text>
+				<Text className='text-[80px] font-bold'>{currentTime}</Text>
 
 				{/* circles container */}
 				<View className='flex-row gap-2'>
@@ -38,13 +40,12 @@ const Timer = () => {
 			<View className='items-center gap-3'>
 				<Text>hold to give up</Text>
 				<View className='border w-20 h-20 justify-center items-center rounded-full'>
-					<FontAwesome className='left-[2px]' name='play' size={30} color='black' />
+					{isTimerActive ? (
+						<FontAwesome name='pause' size={30} color='black' onPress={stopTimer} />
+					) : (
+						<FontAwesome name='play' size={30} color='black' onPress={startTimer} />
+					)}
 				</View>
-			</View>
-			<View className="flex-row gap-5 border grow">
-				<Text className="border p-2 grow basis-0 text-right">12345678</Text>
-				<Text className="border p-2">2</Text>
-				<Text className="border p-2 items-start grow basis-0">3123</Text>
 			</View>
 
 			{/* 3 icons view */}
@@ -59,21 +60,19 @@ const Timer = () => {
 				</View>
 				{/* icon */}
 				<View className='items-center opacity-30 '>
-					<Text className="text-sm">5 min</Text>
+					<Text className='text-sm'>5 min</Text>
 					<Coffee className='color-black' size={50} strokeWidth={1} />
-					<Text className="text-sm">break</Text>
+					<Text className='text-sm'>break</Text>
 				</View>
 				{/* icon */}
 				<View className='items-start opacity-30  grow basis-0'>
-				<View className='items-center'>
-					<Text className="text-sm">15 min</Text>
-					<Armchair className='color-black' size={50} strokeWidth={1} />
-					<Text className="text-sm">long break</Text>
+					<View className='items-center'>
+						<Text className='text-sm'>15 min</Text>
+						<Armchair className='color-black' size={50} strokeWidth={1} />
+						<Text className='text-sm'>long break</Text>
 					</View>
 				</View>
 			</View>
-
-			
 		</View>
 	)
 }
