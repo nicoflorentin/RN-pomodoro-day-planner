@@ -1,10 +1,8 @@
 import { Tabs } from "expo-router"
-import { View } from "lucide-react-native"
 import React from "react"
 import { Timer } from "~/lib/icons/Timer"
 import { ListChecks } from "~/lib/icons/ListChecks"
 import { FontAwesome6 } from "~/lib/icons/ChartColumnIncreasing"
-import { Text } from "react-native"
 
 export default function TabLayout() {
 	return (
