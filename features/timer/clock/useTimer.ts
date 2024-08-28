@@ -1,27 +1,24 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 
-type UseTimerReturn = {
-	currentTime: number
-	isTimerActive: boolean
-	startTimer: () => void
-	stopTimer: () => void
-	resetTimer: () => void
-}
+function useTimer(initialTime = 3000) {
+	// Inicializa el estado del timer con el valor inicial
+	const [currentTime, setCurrentTime] = useState(initialTime)
+	const [isTimerActive, setIsTimerActive] = useState(false)
 
-function useTimer(initialTime = 3000): UseTimerReturn {
-	const [currentTime, setCurrentTime] = useState<number>(initialTime)
-	const [isTimerActive, setIsTimerActive] = useState<boolean>(false)
-
+	// Crea una referencia para el intervalo
 	const timerIntervalRef = useRef<NodeJS.Timeout | null>(null)
 
+	// Función para iniciar el timer
 	const startTimer = useCallback(() => {
 		if (timerIntervalRef.current) return
+
 		setIsTimerActive(true)
 		timerIntervalRef.current = setInterval(() => {
 			setCurrentTime((prevTime) => prevTime - 1)
 		}, 1000)
 	}, [])
 
+	// Función para parar el timer
 	const stopTimer = useCallback(() => {
 		if (timerIntervalRef.current) {
 			clearInterval(timerIntervalRef.current)
@@ -30,6 +27,7 @@ function useTimer(initialTime = 3000): UseTimerReturn {
 		setIsTimerActive(false)
 	}, [])
 
+	// Función para resetear el timer
 	const resetTimer = useCallback(() => {
 		stopTimer()
 		setCurrentTime(initialTime)

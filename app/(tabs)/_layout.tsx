@@ -22,7 +22,7 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name='tasks'
 				options={{
-					title: "taskss",
+					title: "tasks",
 					tabBarIcon: ({ color }) => <ListChecks size={28} color={color} />,
 				}}
 			/>
