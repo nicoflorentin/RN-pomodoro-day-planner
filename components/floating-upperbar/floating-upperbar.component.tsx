@@ -2,7 +2,6 @@ import { View, Text } from "react-native"
 import { AlignJustify } from "~/lib/icons/AlignJustify"
 import { Settings } from "~/lib/icons/Settings"
 
-
 const FloatingUpperBar = () => {
 	return (
 		<View className='flex-row items-center gap-5 self-stretch'>
@@ -15,4 +14,4 @@ const FloatingUpperBar = () => {
 	)
 }
 
-export {FloatingUpperBar}
+export { FloatingUpperBar }

@@ -11,6 +11,7 @@ import { useColorScheme } from "~/lib/useColorScheme"
 import { PortalHost } from "@rn-primitives/portal"
 
 import Constants from "expo-constants"
+import { ThemeToggle } from "~/components/ThemeToggle"
 
 console.log(Constants)
 
@@ -83,7 +84,8 @@ export default function RootLayout() {
 				<Stack.Screen
 					name='(tabs)'
 					options={{
-						headerShown: false,
+						// headerShown: false,
+						headerRight: () => <ThemeToggle></ThemeToggle>,
 					}}
 				/>
 			</Stack>
