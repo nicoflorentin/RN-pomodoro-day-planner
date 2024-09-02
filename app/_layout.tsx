@@ -84,8 +84,8 @@ export default function RootLayout() {
 				<Stack.Screen
 					name='(tabs)'
 					options={{
-						// headerShown: false,
-						headerRight: () => <ThemeToggle></ThemeToggle>,
+						headerShown: false,
+						// headerRight: () => <ThemeToggle></ThemeToggle>,
 					}}
 				/>
 			</Stack>

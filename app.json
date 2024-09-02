@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Pomodoro",
-    "slug": "pomodoro-mobile",
+    "name": "Starter Base",
+    "slug": "starter-base",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
