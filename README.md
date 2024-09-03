@@ -1,16 +1,24 @@
-# Starter base
+# Pomodoro App
 
-A starting point to help you set up your project quickly and use the common components provided by `react-native-reusables`. The idea is to make it easier for you to get started.
+A mobile Pomodoro application built with React Native and Expo. This app will help you manage your time effectively using the Pomodoro technique.
 
-## Features
+![Pomodoro App](https://github.com/user-attachments/assets/06633af4-bfd4-4e8f-af4d-71520da2d4d9)
 
-- NativeWind v4
-- Dark and light mode
-    - Android Navigation Bar matches mode
-    - Persistant mode
-- Common components
-    - ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
+## Technologies
 
-<img src="https://github.com/mrzachnugent/react-native-reusables/assets/63797719/42c94108-38a7-498b-9c70-18640420f1bc"
-     alt="starter-base-template"
-     style="width:270px;" />
+- **React Native**: A framework for building native apps using React.
+- **Expo**: A framework and platform for universal React applications.
+- **React Native Reusables**: A collection of reusable components for React Native.
+- **NativeWind**: A utility-first CSS framework for styling React Native components.
+- **Zustand**: A small, fast state-management tool for React.
+- **React Query**: A powerful data-fetching and state management library for React.
+
+## Requirements
+
+- Node.js (Recommended: latest LTS version)
+- npm (Comes with Node.js)
+- Expo CLI (You can install it globally using `npm install -g expo-cli`)
+
+## Installation
+
+1. Clone the repository:
