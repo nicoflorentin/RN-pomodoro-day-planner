@@ -9,11 +9,7 @@ import { Platform, Text, View } from "react-native"
 import { NAV_THEME } from "~/lib/constants"
 import { useColorScheme } from "~/lib/useColorScheme"
 import { PortalHost } from "@rn-primitives/portal"
-
 import Constants from "expo-constants"
-import { ThemeToggle } from "~/components/ThemeToggle"
-
-console.log(Constants)
 
 const LIGHT_THEME: Theme = {
 	dark: false,
