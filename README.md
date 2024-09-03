@@ -22,3 +22,27 @@ A mobile Pomodoro application built with React Native and Expo. This app will he
 ## Installation
 
 1. Clone the repository:
+
+    ```bash
+    git clone <REPOSITORY_URL>
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd repository-name
+    ```
+
+3. Install project dependencies:
+
+    ```bash
+    npm install
+    ```
+
+## Running the Project
+
+To start the project, use the following command:
+
+```bash
+npx expo start
+```
