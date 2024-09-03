@@ -24,7 +24,7 @@ A mobile Pomodoro application built with React Native and Expo. This app will he
 1. Clone the repository:
 
     ```bash
-    git clone <REPOSITORY_URL>
+    git clone https://github.com/nicoflorentin/RN-pomodoro-day-planner.git
     ```
 
 2. Navigate to the project directory:
