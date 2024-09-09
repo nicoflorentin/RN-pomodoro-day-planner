@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 
-function useTimer(initialTime = 5) {
+const defaultOnTimeEnd = () => {
+	console.log("time is over!")
+}
+
+function useTimer(initialTime = 3, onTimeEnd: () => void = defaultOnTimeEnd) {
 	// Initializes the timer state with the initial value
 	const [currentTime, setCurrentTime] = useState(initialTime)
 	const [isTimerActive, setIsTimerActive] = useState(false)
@@ -36,8 +40,9 @@ function useTimer(initialTime = 5) {
 			setCurrentTime((prevTime) => {
 				if (prevTime === 1) {
 					resetTimer()
+					onTimeEnd()
 					// returns 1 because setState callback can only return numbers
-					return 1
+					return prevTime
 				} else {
 					return prevTime - 1
 				}
@@ -55,4 +60,3 @@ function useTimer(initialTime = 5) {
 }
 
 export { useTimer }
-
