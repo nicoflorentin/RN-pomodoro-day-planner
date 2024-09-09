@@ -7,7 +7,7 @@ import { Circles } from "~/features/tasks"
 import { FloatingUpperBar } from "~/components/floating-upperbar/floating-upperbar.component"
 
 const Pomodoro = () => {
-	const { currentTime, startTimer, stopTimer, isTimerActive } = useTimer() 
+	const { currentTime, startTimer, stopTimer, resetTimer, isTimerActive } = useTimer()
 
 	return (
 		<View className='items-center gap-32 grow py-3'>
@@ -16,7 +16,7 @@ const Pomodoro = () => {
 				<Timer currentTime={currentTime} />
 				<Circles />
 			</View>
-			<PlayPause isTimerActive={isTimerActive} stopTimer={stopTimer} startTimer={startTimer} />
+			<PlayPause resetTimer={resetTimer} isTimerActive={isTimerActive} stopTimer={stopTimer} startTimer={startTimer} />
 			<ThreeIconsTaskState />
 		</View>
 	)

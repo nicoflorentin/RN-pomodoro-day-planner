@@ -19,4 +19,3 @@ export interface Task {
 	isTimerActive?: boolean
 	completed: boolean
 }
-

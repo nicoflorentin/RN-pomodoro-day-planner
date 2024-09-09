@@ -13,7 +13,7 @@ const useConfigStore = create<ConfigStore>((set) => ({
     break: 5,
     longBreak: 15
   },
-  setStagesConfig: (config) => set({ stagesConfig: config }),
+  setStagesConfig: (config: StagesConfig) => set({ stagesConfig: config }),
 }));
 
 export default useConfigStore;
