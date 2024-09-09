@@ -10,7 +10,7 @@ interface ConfigStore {
 	completePeriod: (taskId: string) => void
 }
 
-const useConfigStore = create<ConfigStore>((set) => ({
+const useTaskStore = create<ConfigStore>((set) => ({
 	tasks: [],
 	currentTask: { id: "", title: "", priority: Priority.LOW, periodsQuantity: 0, currentPeriod: 0, completed: false },
 	addTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
@@ -34,4 +34,4 @@ const useConfigStore = create<ConfigStore>((set) => ({
 		}),
 }))
 
-export default useConfigStore
+export default useTaskStore

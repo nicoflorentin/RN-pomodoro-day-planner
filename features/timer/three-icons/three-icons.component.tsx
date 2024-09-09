@@ -2,15 +2,15 @@ import { View, Text } from "react-native"
 import { Lightbulb } from "~/lib/icons/Lightbulb"
 import { Coffee } from "~/lib/icons/Coffee"
 import { Armchair } from "~/lib/icons/Armchair"
-import useConfigStore from "~/features/store/config.state"
 import { PomodoroStage } from "~/types"
+import useTimerStore from "~/features/store/timer.state"
 
 interface ThreeIconsTaskStateProps {
 	stage: PomodoroStage
 }
 
 const ThreeIconsTaskState = ({ stage }: ThreeIconsTaskStateProps) => {
-	const { stagesConfig } = useConfigStore((state) => state)
+	const { stagesConfig } = useTimerStore((state) => state)
 
 	return (
 		<View className='flex-row gap-10'>
