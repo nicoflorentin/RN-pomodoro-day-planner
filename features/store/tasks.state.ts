@@ -1,37 +1,42 @@
 // store.ts
 import { create } from "zustand"
-import { Priority, Task, TaskStatus } from "~/types"
+import { Priority, Task } from "~/types"
 
 interface ConfigStore {
 	tasks: Task[]
-	currentTask: Task
+	currentTaskId: string
+
 	addTask: (task: Task) => void
 	removeTask: (taskId: string) => void
-	completePeriod: (taskId: string) => void
+	completeTaskPeriod: (taskId: string) => void
 }
 
 const useTaskStore = create<ConfigStore>((set) => ({
-	tasks: [],
-	currentTask: { id: "", title: "", priority: Priority.LOW, periodsQuantity: 0, currentPeriod: 0, completed: false },
-	addTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
-	removeTask: (taskId) =>
+	tasks: [
+		{
+			id: "5f8a8f22-0643-4f6a-9e1b-1f3a9c2f3c7f",
+			title: "Estudiar React Native",
+			priority: Priority.MEDIUM,
+			periodsQuantity: 4,
+			currentPeriod: 0,
+			completed: false,
+		},
+	],
+	currentTaskId: "5f8a8f22-0643-4f6a-9e1b-1f3a9c2f3c7f",
+	addTask: (newTask) => set((state) => ({ tasks: [...state.tasks, newTask] })),
+	removeTask: (taskToDeleteId) =>
 		set((state) => ({
-			tasks: state.tasks.filter((task) => task.id !== taskId),
+			tasks: state.tasks.filter((task) => task.id !== taskToDeleteId),
 		})),
-	completePeriod: (taskId) =>
-		set((state) => {
-			const task = state.tasks.find((task) => task.id === taskId)
-			if (!task) return { tasks: state.tasks }
-			const newTask = {
-				...task,
-				currentPeriod:
-					task.periodsQuantity === task.currentPeriod + 1 ? task.periodsQuantity : task.currentPeriod + 1,
-				completed: task.currentPeriod + 1 > task.periodsQuantity,
-			}
-			return {
-				tasks: state.tasks.map((task) => (task.id === taskId ? newTask : task)),
-			}
-		}),
+	completeTaskPeriod: (taskIdToComplete) =>
+		set((state) => ({
+			tasks: state.tasks.map((task) =>
+				task.id === taskIdToComplete
+					? { ...task, currentPeriod: task.currentPeriod + 1, completed: task.currentPeriod > task.periodsQuantity}
+					: task
+			),
+		})),
 }))
 
 export default useTaskStore
+

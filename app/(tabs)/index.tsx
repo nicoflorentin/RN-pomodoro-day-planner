@@ -7,30 +7,28 @@ import { Circles } from "~/features/tasks"
 import { FloatingUpperBar } from "~/components/floating-upperbar/floating-upperbar.component"
 import { PomodoroStage } from "~/types"
 import useTimerStore from "~/features/store/timer.state"
+import useTaskStore from "~/features/store/tasks.state"
 
 const Pomodoro = () => {
 	const onTimerEnd = () => {
-		setHasTimerEnded(true)
+		if (currentStage === PomodoroStage.FOCUS) {
+			setCurrentStage(PomodoroStage.BREAK)
+			completeTaskPeriod(tasks[0].id)
+		} else if (currentStage === PomodoroStage.BREAK) {
+			setCurrentStage(PomodoroStage.FOCUS)
+		}
 	}
 
+	const { tasks, completeTaskPeriod } = useTaskStore((state) => state)
 	const { setCurrentStage, currentStage } = useTimerStore((state) => state)
-	const [hasTimerEnded, setHasTimerEnded] = useState(false)
 	const { currentTime, startTimer, stopTimer, resetTimer, isTimerActive } = useTimer(3, onTimerEnd)
-
-	// Effect to handle the stage change outside the render cycle
-	useEffect(() => {
-		if (hasTimerEnded) {
-			setCurrentStage(PomodoroStage.BREAK)
-			setHasTimerEnded(false) // Reset the flag after updating the stage
-		}
-	}, [hasTimerEnded, setCurrentStage])
 
 	return (
 		<View className='items-center gap-32 grow py-3'>
 			<FloatingUpperBar />
 			<View className='items-center'>
 				<Timer currentTime={currentTime} />
-				<Circles />
+				<Circles task={tasks[0]} />
 			</View>
 			<PlayPause resetTimer={resetTimer} isTimerActive={isTimerActive} stopTimer={stopTimer} startTimer={startTimer} />
 			<ThreeIconsTaskState stage={currentStage} />

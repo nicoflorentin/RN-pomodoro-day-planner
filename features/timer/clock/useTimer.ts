@@ -11,6 +11,13 @@ function useTimer(initialTime = 3, onTimeEnd: () => void = defaultOnTimeEnd) {
 
 	console.log("currentTime", currentTime)
 
+	useEffect(() => {
+		if (currentTime === 0) {
+			resetTimer()
+			onTimeEnd()
+		}
+	}, [currentTime])
+
 	// Creates a reference to the interval
 	const timerIntervalRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -37,24 +44,9 @@ function useTimer(initialTime = 3, onTimeEnd: () => void = defaultOnTimeEnd) {
 		if (timerIntervalRef.current) return
 		setIsTimerActive(true)
 		timerIntervalRef.current = setInterval(() => {
-			setCurrentTime((prevTime) => {
-				if (prevTime === 1) {
-					resetTimer()
-					onTimeEnd()
-					// returns 1 because setState callback can only return numbers
-					return prevTime
-				} else {
-					return prevTime - 1
-				}
-			})
+			setCurrentTime((prevTime) => prevTime - 1)
 		}, 1000)
 	}, [])
-
-	useEffect(() => {
-		return () => {
-			stopTimer()
-		}
-	}, [stopTimer])
 
 	return { currentTime, isTimerActive, startTimer, stopTimer, resetTimer }
 }
