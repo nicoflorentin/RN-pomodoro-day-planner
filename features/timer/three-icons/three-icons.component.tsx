@@ -29,7 +29,7 @@ const ThreeIconsTaskState = ({ stage }: ThreeIconsTaskStateProps) => {
 				<Text className='text-sm'>break</Text>
 			</View>
 			{/* icon */}
-			<View className={`items-start opacity-30  grow basis-0 ${stage === PomodoroStage.LONG_BREAK ? '' : 'opacity-30'}`}>
+			<View className={`items-start grow basis-0 ${stage === PomodoroStage.LONG_BREAK ? '' : 'opacity-30'}`}>
 				<View className='items-center'>
 					<Text className='text-sm'>{stagesConfig.longBreak} min</Text>
 					<Armchair className='color-black' size={50} strokeWidth={1} />

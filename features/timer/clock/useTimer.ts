@@ -18,6 +18,11 @@ function useTimer(initialTime = 3, onTimeEnd: () => void = defaultOnTimeEnd) {
 		}
 	}, [currentTime])
 
+	// Monitorea si `initialTime` cambia y actualiza el tiempo
+	useEffect(() => {
+		setCurrentTime(initialTime)
+	}, [initialTime])
+
 	// Creates a reference to the interval
 	const timerIntervalRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -45,7 +50,7 @@ function useTimer(initialTime = 3, onTimeEnd: () => void = defaultOnTimeEnd) {
 		setIsTimerActive(true)
 		timerIntervalRef.current = setInterval(() => {
 			setCurrentTime((prevTime) => prevTime - 1)
-		}, 1000)
+		}, 50)
 	}, [])
 
 	return { currentTime, isTimerActive, startTimer, stopTimer, resetTimer }

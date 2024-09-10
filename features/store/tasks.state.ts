@@ -17,7 +17,7 @@ const useTaskStore = create<ConfigStore>((set) => ({
 			id: "5f8a8f22-0643-4f6a-9e1b-1f3a9c2f3c7f",
 			title: "Estudiar React Native",
 			priority: Priority.MEDIUM,
-			periodsQuantity: 4,
+			periodsQuantity: 2,
 			currentPeriod: 0,
 			completed: false,
 		},
@@ -28,15 +28,18 @@ const useTaskStore = create<ConfigStore>((set) => ({
 		set((state) => ({
 			tasks: state.tasks.filter((task) => task.id !== taskToDeleteId),
 		})),
-	completeTaskPeriod: (taskIdToComplete) =>
+	completeTaskPeriod: (taskId) =>
 		set((state) => ({
 			tasks: state.tasks.map((task) =>
-				task.id === taskIdToComplete
-					? { ...task, currentPeriod: task.currentPeriod + 1, completed: task.currentPeriod > task.periodsQuantity}
+				task.id === taskId
+					? {
+							...task,
+							currentPeriod: task.currentPeriod + 1,
+							completed: task.currentPeriod > task.periodsQuantity,
+					  }
 					: task
 			),
 		})),
 }))
 
 export default useTaskStore
-

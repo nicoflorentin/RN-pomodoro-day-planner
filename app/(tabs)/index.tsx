@@ -1,5 +1,5 @@
 import { View } from "react-native"
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useTimer } from "~/features/timer"
 import { PlayPause, Timer } from "~/features/timer"
 import { ThreeIconsTaskState } from "~/features/timer"
@@ -10,8 +10,10 @@ import useTimerStore from "~/features/store/timer.state"
 import useTaskStore from "~/features/store/tasks.state"
 
 const Pomodoro = () => {
-	const onTimerEnd = () => {
-		if (currentStage === PomodoroStage.FOCUS) {
+	const onTimerEnd = (): void => {
+		if (currentStage === PomodoroStage.FOCUS && tasks[0].currentPeriod === tasks[0].periodsQuantity) {
+			setCurrentStage(PomodoroStage.LONG_BREAK)
+		} else if (currentStage === PomodoroStage.FOCUS) {
 			setCurrentStage(PomodoroStage.BREAK)
 			completeTaskPeriod(tasks[0].id)
 		} else if (currentStage === PomodoroStage.BREAK) {
@@ -20,8 +22,13 @@ const Pomodoro = () => {
 	}
 
 	const { tasks, completeTaskPeriod } = useTaskStore((state) => state)
-	const { setCurrentStage, currentStage } = useTimerStore((state) => state)
-	const { currentTime, startTimer, stopTimer, resetTimer, isTimerActive } = useTimer(3, onTimerEnd)
+	const { setCurrentStage, currentStage, stagesConfig } = useTimerStore((state) => state)
+	const { currentTime, startTimer, stopTimer, resetTimer, isTimerActive } = useTimer(
+		stagesConfig[currentStage],
+		onTimerEnd
+	)
+
+	console.log("currentStage", currentStage)
 
 	return (
 		<View className='items-center gap-32 grow py-3'>
