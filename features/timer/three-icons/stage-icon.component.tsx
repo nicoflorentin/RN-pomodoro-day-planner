@@ -13,15 +13,14 @@ interface StageIconProps {
 }
 
 const StageIcon = ({ stage, matchingStage, stageLength, Icon, label, onPress }: StageIconProps) => {
+	const isHighlighted = stage === matchingStage
+
 	return (
-		<TouchableOpacity
-			onPress={onPress}
-			className={`items-end grow basis-0 ${stage === matchingStage ? "" : "opacity-30"}`}
-		>
+		<TouchableOpacity onPress={onPress} className={`items-end grow basis-0 ${isHighlighted ? "" : "opacity-30"}`}>
 			<View className='items-center'>
-				<Text className='font-bold text-sm'>{stageLength} min</Text>
+				<Text className={` ${isHighlighted ? "font-bold" : ""} text-sm`}>{stageLength} min</Text>
 				<Icon className='color-black' size={50} strokeWidth={1} />
-				<Text className='font-bold text-sm'>{label}</Text>
+				<Text className={` ${isHighlighted ? "font-bold" : ""} text-sm`}>{label}</Text>
 			</View>
 		</TouchableOpacity>
 	)
