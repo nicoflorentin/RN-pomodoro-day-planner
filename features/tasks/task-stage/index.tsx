@@ -1,1 +1,1 @@
-export { Circles } from "./task-stage-indicator.component"
+export { Circles } from "./task-period-indicator.component"

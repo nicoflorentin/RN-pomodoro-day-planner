@@ -9,8 +9,6 @@ function useTimer(initialTime = 3, onTimeEnd: () => void = defaultOnTimeEnd) {
 	const [currentTime, setCurrentTime] = useState(initialTime)
 	const [isTimerActive, setIsTimerActive] = useState(false)
 
-	console.log("currentTime", currentTime)
-
 	useEffect(() => {
 		if (currentTime === 0) {
 			resetTimer()

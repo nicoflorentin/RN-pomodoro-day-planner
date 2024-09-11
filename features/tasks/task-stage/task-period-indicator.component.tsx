@@ -9,8 +9,6 @@ const Circles = ({ task }: CirclesProps) => {
 	console.log("currentPeriod", task.currentPeriod)
 
 	const circleStyleHandler = (i: number): string | undefined => {
-
-		console.log('i', i)
 		if (i + 1 === task.currentPeriod) {
 			return "border-4"
 		}
