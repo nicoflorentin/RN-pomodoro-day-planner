@@ -2,7 +2,7 @@
 
 A mobile Pomodoro application built with React Native and Expo. This app will help you manage your time effectively using the Pomodoro technique.
 
-![Pomodoro App](https://github.com/user-attachments/assets/06633af4-bfd4-4e8f-af4d-71520da2d4d9)
+![Pomodoro App](https://github.com/user-attachments/assets/c1611870-7fe7-4996-9bd3-20d090751c43)
 
 ## Technologies
 
