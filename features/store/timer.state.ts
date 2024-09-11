@@ -12,7 +12,7 @@ interface ConfigStore {
 
 const useTimerStore = create<ConfigStore>((set) => ({
 	stagesConfig: {
-		focus: 25,
+		focus: 10,
 		break: 5,
 		longBreak: 15,
 	},

@@ -19,7 +19,6 @@ const PlayPause = ({ startTimer, stopTimer, resetTimer, isTimerActive }: PlayBut
 				)}
 			</View>
 			<Text className="text-sm">hold to give up</Text>
-			<Pressable onPress={() => resetTimer()} className='border px-4'><Text>reset</Text></Pressable>
 		</View>
 	)
 }

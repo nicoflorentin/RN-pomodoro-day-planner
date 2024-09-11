@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 
 const defaultOnTimeEnd = () => {
-	console.log("time is over!")
+	console.log("Time's up!")
 }
 
 function useTimer(initialTime = 3, onTimeEnd: () => void = defaultOnTimeEnd) {
@@ -18,7 +18,7 @@ function useTimer(initialTime = 3, onTimeEnd: () => void = defaultOnTimeEnd) {
 		}
 	}, [currentTime])
 
-	// Monitorea si `initialTime` cambia y actualiza el tiempo
+	// Monitors if `initialTime` changes and updates the time
 	useEffect(() => {
 		setCurrentTime(initialTime)
 	}, [initialTime])
@@ -28,7 +28,7 @@ function useTimer(initialTime = 3, onTimeEnd: () => void = defaultOnTimeEnd) {
 
 	// Function to stop the timer
 	const stopTimer = useCallback(() => {
-		console.log("stop timer ()")
+		console.log("Stopping timer")
 		if (timerIntervalRef.current) {
 			clearInterval(timerIntervalRef.current)
 			timerIntervalRef.current = null
@@ -38,14 +38,14 @@ function useTimer(initialTime = 3, onTimeEnd: () => void = defaultOnTimeEnd) {
 
 	// Function to reset the timer
 	const resetTimer = useCallback(() => {
-		console.log("reset timer ()")
+		console.log("Resetting timer")
 		stopTimer()
 		setCurrentTime(initialTime)
 	}, [initialTime, stopTimer])
 
 	// Function to start the timer
 	const startTimer = useCallback(() => {
-		console.log("start timer ()")
+		console.log("Starting timer")
 		if (timerIntervalRef.current) return
 		setIsTimerActive(true)
 		timerIntervalRef.current = setInterval(() => {

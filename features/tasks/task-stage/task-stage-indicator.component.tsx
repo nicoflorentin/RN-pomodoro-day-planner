@@ -6,10 +6,24 @@ interface CirclesProps {
 }
 
 const Circles = ({ task }: CirclesProps) => {
+	console.log("currentPeriod", task.currentPeriod)
+
+	const circleStyleHandler = (i: number): string | undefined => {
+
+		console.log('i', i)
+		if (i + 1 === task.currentPeriod) {
+			return "border-4"
+		}
+		if (i + 1 <= task.currentPeriod) {
+			return "border-4 bg-black"
+		}
+
+	}
+
 	const circles = Array.from({ length: task.periodsQuantity }).map((_, i) => (
 		<View
 			key={i}
-			className={`rounded-full border border-black w-5 h-5 ${i < task.currentPeriod ? 'bg-black' : ''}`}
+			className={`rounded-full border border-black w-6 h-6 ${circleStyleHandler(i)}`}
 		/>
 	))
 
@@ -17,4 +31,3 @@ const Circles = ({ task }: CirclesProps) => {
 }
 
 export { Circles }
-

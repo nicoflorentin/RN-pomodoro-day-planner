@@ -1,4 +1,4 @@
-import { View } from "react-native"
+import { Text, View } from "react-native"
 import React, { useState, useEffect, useRef } from "react"
 import { useTimer } from "~/features/timer"
 import { PlayPause, Timer } from "~/features/timer"
@@ -11,8 +11,9 @@ import useTaskStore from "~/features/store/tasks.state"
 
 const Pomodoro = () => {
 	const onTimerEnd = (): void => {
-		if (currentStage === PomodoroStage.FOCUS && tasks[0].currentPeriod === tasks[0].periodsQuantity) {
+		if (currentStage === PomodoroStage.FOCUS && tasks[0].currentPeriod + 1 > tasks[0].periodsQuantity) {
 			setCurrentStage(PomodoroStage.LONG_BREAK)
+			completeTaskPeriod(tasks[0].id)
 		} else if (currentStage === PomodoroStage.FOCUS) {
 			setCurrentStage(PomodoroStage.BREAK)
 			completeTaskPeriod(tasks[0].id)
@@ -31,11 +32,17 @@ const Pomodoro = () => {
 	console.log("currentStage", currentStage)
 
 	return (
-		<View className='items-center gap-32 grow py-3'>
+		// <View className='items-center gap-32 grow py-3'>
+		<View className='items-center gap-28 grow py-3'>
 			<FloatingUpperBar />
 			<View className='items-center'>
 				<Timer currentTime={currentTime} />
 				<Circles task={tasks[0]} />
+				<View>
+					<Text>current stage {currentStage}</Text>
+					<Text>current period {tasks[0].currentPeriod}</Text>
+					<Text>total periods {tasks[0].periodsQuantity}</Text>
+				</View>
 			</View>
 			<PlayPause resetTimer={resetTimer} isTimerActive={isTimerActive} stopTimer={stopTimer} startTimer={startTimer} />
 			<ThreeIconsTaskState stage={currentStage} />
