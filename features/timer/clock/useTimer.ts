@@ -48,7 +48,7 @@ function useTimer(initialTime = 3, onTimeEnd: () => void = defaultOnTimeEnd) {
 		setIsTimerActive(true)
 		timerIntervalRef.current = setInterval(() => {
 			setCurrentTime((prevTime) => prevTime - 1)
-		}, 50)
+		}, 1000)
 	}, [])
 
 	return { currentTime, isTimerActive, startTimer, stopTimer, resetTimer }

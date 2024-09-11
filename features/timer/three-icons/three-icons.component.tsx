@@ -14,7 +14,7 @@ const ThreeIconsTaskState = ({ stage }: ThreeIconsTaskStateProps) => {
 	const { stagesConfig, setCurrentStage } = useTimerStore((state) => state)
 
 	return (
-		<View className='flex-row gap-10'>
+		<View className='flex-row grow gap-5'>
 			<StageIcon
 				stage={stage}
 				matchingStage={PomodoroStage.FOCUS}
@@ -22,6 +22,8 @@ const ThreeIconsTaskState = ({ stage }: ThreeIconsTaskStateProps) => {
 				Icon={Lightbulb}
 				label='focus'
 				onPress={() => setCurrentStage(PomodoroStage.FOCUS)}
+				position='left'
+
 			/>
 			<StageIcon
 				stage={stage}
@@ -30,6 +32,7 @@ const ThreeIconsTaskState = ({ stage }: ThreeIconsTaskStateProps) => {
 				Icon={Coffee}
 				label='break'
 				onPress={() => setCurrentStage(PomodoroStage.BREAK)}
+				position='center'
 			/>
 			<StageIcon
 				stage={stage}
@@ -38,6 +41,7 @@ const ThreeIconsTaskState = ({ stage }: ThreeIconsTaskStateProps) => {
 				Icon={Armchair}
 				label='long break'
 				onPress={() => setCurrentStage(PomodoroStage.LONG_BREAK)}
+				position='right'
 			/>
 		</View>
 	)

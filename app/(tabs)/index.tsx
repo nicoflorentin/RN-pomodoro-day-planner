@@ -32,17 +32,17 @@ const Pomodoro = () => {
 	console.log("currentStage", currentStage)
 
 	return (
-		// <View className='items-center gap-32 grow py-3'>
-		<View className='items-center gap-28 grow py-3'>
+		<View className='items-center gap-32 grow py-3'>
+		{/* <View className='items-center gap-28 grow py-3'> */}
 			<FloatingUpperBar />
 			<View className='items-center'>
 				<Timer currentTime={currentTime} />
 				<Circles task={tasks[0]} />
-				<View>
+				{/* <View>
 					<Text>current stage {currentStage}</Text>
 					<Text>current period {tasks[0].currentPeriod}</Text>
 					<Text>total periods {tasks[0].periodsQuantity}</Text>
-				</View>
+				</View> */}
 			</View>
 			<PlayPause resetTimer={resetTimer} isTimerActive={isTimerActive} stopTimer={stopTimer} startTimer={startTimer} />
 			<ThreeIconsTaskState stage={currentStage} />
