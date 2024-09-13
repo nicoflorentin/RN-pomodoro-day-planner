@@ -9,6 +9,9 @@ import { PomodoroStage } from "~/types"
 import useTimerStore from "~/features/store/timer.state"
 import useTaskStore from "~/features/store/tasks.state"
 
+import { CustomBlackDropdown } from "~/components/black-dropdown/black-dropdown.component"
+import { AlignJustify } from "~/lib/icons/AlignJustify"
+
 const Pomodoro = () => {
 	const onTimerEnd = (): void => {
 		if (currentStage === PomodoroStage.FOCUS && tasks[0].currentPeriod + 1 > tasks[0].periodsQuantity) {
@@ -31,10 +34,17 @@ const Pomodoro = () => {
 
 	console.log("currentStage", currentStage)
 
+	const data = tasks.map((task) => ({
+		label: task.title,
+		value: task.id,
+	}))
+
 	return (
 		<View className='items-center gap-32 grow py-3'>
-		{/* <View className='items-center gap-28 grow py-3'> */}
+			{/* <View className='items-center gap-28 grow py-3'> */}
 			<FloatingUpperBar />
+			<CustomBlackDropdown data={data} />
+
 			<View className='items-center'>
 				<Timer currentTime={currentTime} />
 				<Circles task={tasks[0]} />
