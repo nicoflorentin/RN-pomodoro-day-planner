@@ -23,8 +23,12 @@ interface TaskElement {
 }
 
 const CustomBlackDropdown = ({ data }: { data: TaskElement[] }) => {
-	const [selectedTaskName, setSelectedTaskName] = useState("Select a task")
-	const { removeTask } = useTaskStore((state) => state)
+	// const [selectedTaskName, setSelectedTaskName] = useState("Select a task")
+	const { removeTask, setCurrentTask, getCurrentTask } = useTaskStore((state) => state)
+	const taskStore = useTaskStore((state) => state)
+	console.log(taskStore)
+	
+	const currentTask = getCurrentTask()
 
 	const renderItem = (item: TaskElement) => {
 		return (
@@ -46,11 +50,11 @@ const CustomBlackDropdown = ({ data }: { data: TaskElement[] }) => {
 					placeholderStyle={{ color: "white", fontWeight: "bold" }}
 					labelField={"label"}
 					valueField={"value"}
-					value={selectedTaskName}
-					onChange={(item) => setSelectedTaskName(item.label)}
+					value={currentTask?.title}
+					onChange={(item) => setCurrentTask(item.value)}
 					style={{
 						width: 250,
-						backgroundColor: "black",
+						backgroundColor: "gray",
 						paddingVertical: 15,
 						paddingHorizontal: 35,
 						borderRadius: 50,
