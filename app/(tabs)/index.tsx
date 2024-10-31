@@ -1,5 +1,5 @@
 import { Text, View } from "react-native"
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef, useCallback } from "react"
 import { useTimer } from "~/features/timer"
 import { PlayPause, Timer } from "~/features/timer"
 import { ThreeIconsTaskState } from "~/features/timer"
@@ -13,7 +13,10 @@ import { CustomBlackDropdown } from "~/components/black-dropdown/black-dropdown.
 import { AlignJustify } from "~/lib/icons/AlignJustify"
 
 const Pomodoro = () => {
-	const onTimerEnd = (): void => {
+	const { tasks, completeTaskPeriod, currentTaskId } = useTaskStore((state) => state)
+	const { setCurrentStage, currentStage, stagesConfig } = useTimerStore((state) => state)
+
+	const onTimerEnd = useCallback((): void => {
 		if (currentStage === PomodoroStage.FOCUS && tasks[0].currentPeriod + 1 > tasks[0].periodsQuantity) {
 			setCurrentStage(PomodoroStage.LONG_BREAK)
 			completeTaskPeriod(tasks[0].id)
@@ -23,16 +26,14 @@ const Pomodoro = () => {
 		} else if (currentStage === PomodoroStage.BREAK) {
 			setCurrentStage(PomodoroStage.FOCUS)
 		}
-	}
+	}, [currentStage, setCurrentStage, tasks, completeTaskPeriod])
 
-	const { tasks, completeTaskPeriod } = useTaskStore((state) => state)
-	const { setCurrentStage, currentStage, stagesConfig } = useTimerStore((state) => state)
 	const { currentTime, startTimer, stopTimer, resetTimer, isTimerActive } = useTimer(
 		stagesConfig[currentStage],
 		onTimerEnd
 	)
 
-	console.log("currentStage", currentStage)
+	const selectedTask = tasks.find((task) => task.id === currentTaskId)
 
 	const data = tasks.map((task) => ({
 		label: task.title,
@@ -40,19 +41,21 @@ const Pomodoro = () => {
 	}))
 
 	return (
-		<View className='items-center gap-32 grow py-3'>
-			{/* <View className='items-center gap-28 grow py-3'> */}
-			<FloatingUpperBar />
+		// <View className='items-center gap-32 grow py-3'>
+		<View className='items-center gap-28 grow py-3'>
+			{/* <FloatingUpperBar /> */}
 			<CustomBlackDropdown data={data} />
-
 			<View className='items-center'>
 				<Timer currentTime={currentTime} />
-				<Circles task={tasks[0]} />
-				{/* <View>
+				{tasks.length ? <Circles task={tasks[0]} /> : null}
+
+				{/* DEBUG ON SCREEN INFO */}
+				<View>
+					<Text>{selectedTask?.title}</Text>
 					<Text>current stage {currentStage}</Text>
-					<Text>current period {tasks[0].currentPeriod}</Text>
-					<Text>total periods {tasks[0].periodsQuantity}</Text>
-				</View> */}
+					<Text>current period {tasks.length && tasks[0].currentPeriod}</Text>
+					<Text>total periods {tasks.length && tasks[0].periodsQuantity}</Text>
+				</View>
 			</View>
 			<PlayPause resetTimer={resetTimer} isTimerActive={isTimerActive} stopTimer={stopTimer} startTimer={startTimer} />
 			<ThreeIconsTaskState stage={currentStage} />

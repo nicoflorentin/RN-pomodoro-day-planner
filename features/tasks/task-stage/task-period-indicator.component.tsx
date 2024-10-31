@@ -6,7 +6,6 @@ interface CirclesProps {
 }
 
 const Circles = ({ task }: CirclesProps) => {
-	console.log("currentPeriod", task.currentPeriod)
 
 	const circleStyleHandler = (i: number): string | undefined => {
 		if (i + 1 === task.currentPeriod) {

@@ -1,8 +1,11 @@
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import React from "react"
 import { ChevronDown } from "~/lib/icons/ChevronDown"
+import useTaskStore from "~/features/store/tasks.state"
 
 const Tasks = () => {
+	const { addHardcodedTask } = useTaskStore((state) => state)
+
 	return (
 		<View className='gap-3'>
 			{/* task container  */}
@@ -29,8 +32,8 @@ const Tasks = () => {
 				<View className='bg-green-400 w-10 h-10 rounded-full'></View>
 				{/* buttons and taskname container */}
 				<View className='m-auto gap-1'>
-					<Text className="text-center">do my homework</Text>
-					<View className="flex-row gap-3">
+					<Text className='text-center'>do my homework</Text>
+					<View className='flex-row gap-3'>
 						<Pressable className='border self-start py-2 px-4 rounded-xl'>
 							<Text>EDIT</Text>
 						</Pressable>
@@ -38,7 +41,7 @@ const Tasks = () => {
 							<Text>RESET</Text>
 						</Pressable>
 						<Pressable className='bg-red-400 self-start py-2 px-4 rounded-xl'>
-							<Text className="color-white">DELETE</Text>
+							<Text className='color-white'>DELETE</Text>
 						</Pressable>
 					</View>
 				</View>
@@ -46,9 +49,9 @@ const Tasks = () => {
 				<ChevronDown size={23} color={"black"} strokeWidth={3} />
 			</View>
 			{/* add task button */}
-			<View className='bg-black rounded-xl py-1'>
+			<Pressable onPress={() => addHardcodedTask()} className='bg-black rounded-xl py-1'>
 				<Text className='text-4xl color-white font-bold text-center'>+</Text>
-			</View>
+			</Pressable>
 		</View>
 	)
 }
