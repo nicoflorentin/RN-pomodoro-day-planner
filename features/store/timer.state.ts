@@ -12,9 +12,9 @@ interface ConfigStore {
 
 const useTimerStore = create<ConfigStore>((set) => ({
 	stagesConfig: {
-		focus: 10,
-		break: 5,
-		longBreak: 15,
+		focus: 3,
+		break: 2,
+		longBreak: 5,
 	},
   currentStage: PomodoroStage.FOCUS,
 	setStagesConfig: (config: StagesConfig) => set({ stagesConfig: config }),
