@@ -25,8 +25,6 @@ interface TaskElement {
 const CustomBlackDropdown = ({ data }: { data: TaskElement[] }) => {
 	// const [selectedTaskName, setSelectedTaskName] = useState("Select a task")
 	const { removeTask, setCurrentTask, getCurrentTask } = useTaskStore((state) => state)
-	const taskStore = useTaskStore((state) => state)
-	console.log(taskStore)
 	
 	const currentTask = getCurrentTask()
 

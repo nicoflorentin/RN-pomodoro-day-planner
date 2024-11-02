@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Button, Pressable, Text, View } from 'react-native';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useTimer } from '~/features/timer';
 import { PlayPause, Timer } from '~/features/timer';
@@ -11,12 +11,14 @@ import useTaskStore from '~/features/store/tasks.state';
 import { CustomBlackDropdown } from '~/components/black-dropdown/black-dropdown.component';
 
 const Pomodoro = () => {
-  const { tasks, completeTaskPeriod, currentTaskId, getCurrentTask } = useTaskStore(
-    (state) => state
-  );
+  const { tasks, completeTaskPeriod, currentTaskId, getCurrentTask } = useTaskStore((state) => state);
   const { setCurrentStage, currentStage, stagesConfig } = useTimerStore((state) => state);
 
   const currentTask = getCurrentTask();
+
+  const taskStore = useTaskStore((state) => state);
+  console.log('task store', taskStore);
+  console.log('current task id', currentTaskId);
 
   const onTimerEnd = useCallback((): void => {
     if (
@@ -27,19 +29,31 @@ const Pomodoro = () => {
       setCurrentStage(PomodoroStage.LONG_BREAK);
       completeTaskPeriod(currentTaskId);
     } else if (currentStage === PomodoroStage.FOCUS) {
-      setCurrentStage(PomodoroStage.BREAK);
       completeTaskPeriod(currentTaskId);
+      setCurrentStage(PomodoroStage.BREAK);
+      console.log('entro al if');
     } else if (currentStage === PomodoroStage.BREAK) {
       setCurrentStage(PomodoroStage.FOCUS);
     } else if (currentStage === PomodoroStage.LONG_BREAK) {
       setCurrentStage(PomodoroStage.FOCUS);
     }
-  }, [currentStage, setCurrentStage, tasks, completeTaskPeriod]);
+  }, [currentStage, setCurrentStage, tasks, completeTaskPeriod, currentTask]);
 
   const { currentTime, startTimer, stopTimer, resetTimer, isTimerActive } = useTimer(
     stagesConfig[currentStage],
     onTimerEnd
   );
+
+  useEffect(() => {
+    stopTimer();
+    resetTimer();
+  }, [currentStage, stopTimer, resetTimer]);
+
+  useEffect(() => {
+    stopTimer();
+    resetTimer();
+    setCurrentStage(PomodoroStage.FOCUS);
+  }, [currentTaskId]);
 
   const selectedTask = tasks.find((task) => task.id === currentTaskId);
 
@@ -53,7 +67,7 @@ const Pomodoro = () => {
     <View className="items-center gap-28 grow py-3">
       {/* <FloatingUpperBar /> */}
       <CustomBlackDropdown data={data} />
-      <View className="items-center h-[100px] border">
+      <View className="items-center h-[100px]">
         <Timer currentTime={currentTime} />
         {currentTask ? <Circles task={currentTask} /> : null}
 
@@ -71,6 +85,9 @@ const Pomodoro = () => {
         stopTimer={stopTimer}
         startTimer={startTimer}
       />
+      <Pressable onPress={() => completeTaskPeriod(currentTaskId)}>
+        <Text>complete period</Text>
+      </Pressable>
       <ThreeIconsTaskState stage={currentStage} />
     </View>
   );

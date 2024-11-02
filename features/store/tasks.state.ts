@@ -56,6 +56,7 @@ const useTaskStore = create<ConfigStore>((set, get) => ({
           ...hardcodedTask,
           id: id as string,
           title: hardcodedTasksTitles[Math.floor(Math.random() * hardcodedTasksTitles.length)],
+          priority: [Priority.LOW, Priority.MEDIUM, Priority.HIGH][Math.floor(Math.random() * 3)],
         },
       ],
     }));
@@ -69,17 +70,21 @@ const useTaskStore = create<ConfigStore>((set, get) => ({
     }));
   },
   completeTaskPeriod: (taskId) =>
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
-        task.id === taskId
-          ? {
-              ...task,
-              currentPeriod: task.currentPeriod + 1,
-              completed: task.currentPeriod > task.periodsQuantity,
-            }
-          : task
-      ),
-    })),
+    set((state) => {
+      console.log('complete task period', taskId);
+
+      return {
+        tasks: state.tasks.map((task) =>
+          task.id === taskId
+            ? {
+                ...task,
+                currentPeriod: task.currentPeriod + 1,
+                completed: task.currentPeriod > task.periodsQuantity,
+              }
+            : task
+        ),
+      };
+    }),
 }));
 
 export default useTaskStore;
