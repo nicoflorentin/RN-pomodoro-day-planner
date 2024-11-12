@@ -19,7 +19,7 @@ const Circles = ({ task }: CirclesProps) => {
     <View key={i} className={`rounded-full border border-black w-6 h-6 ${circleStyleHandler(i)}`} />
   ));
 
-  return <View className="flex-row gap-2">{circles}</View>;
+  return <View className="flex-row gap-3">{circles}</View>;
 };
 
 export { Circles };
